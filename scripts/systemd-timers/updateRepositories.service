@@ -1,0 +1,6 @@
+[Unit]
+Description=Update Pacman List
+
+[Service]
+Type=simple
+ExecStart=/home/netwokz/scripts/update_repositories.sh

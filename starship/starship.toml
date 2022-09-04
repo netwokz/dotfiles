@@ -1,0 +1,129 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Change command timeout from 500 to 1000 ms
+command_timeout = 1000
+
+# Change the default prompt format
+format = """$env_var \
+$all$character"""
+
+# Change the default prompt characters
+# [character]
+# success_symbol = "[](004)"
+# error_symbol = "[](238)"
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](051)'
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+# Shows the username
+[username]
+style_user = "046"
+style_root = "white"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold yellow) "
+disabled = false
+
+[aws]
+symbol = " "
+disabled = true
+
+[battery]
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+disabled = true
+
+[conda]
+symbol = " "
+
+[custom]
+
+[custom.tab]
+description = "The current tab in the tab terminal multiplexer"
+command = "tab --starship"
+when = "tab --starship"
+shell = ["sh"]
+format = "[$output]($style) "
+style = "bold blue"
+
+[dart]
+symbol = " "
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "at [$path]($style)[$read_only]($read_only_style) "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
+
+[line_break]
+disabled = false
