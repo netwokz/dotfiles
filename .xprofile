@@ -1,0 +1,5 @@
+/home/netwokz/scripts/xrandr.sh &
+
+#xsetroot -cursor_name left_ptr
+
+# xmonad &

@@ -1,127 +1,49 @@
 Config {
 
-  --   black
-  --     color0:  #282a2e
-  --     color8:  #373b41
-  --   red
-  --     color1:  #a54242
-  --     color9:  #cc6666
-  --   green
-  --     color2:  #8c9440
-  --     color10: #b5bd68
-  --   yellow
-  --     color3:  #de935f
-  --     color11: #f0c674
-  --   blue
-  --     color4:  #5f819d
-  --     color12: #81a2be
-  --   magenta
-  --     color5:  #85678f
-  --     color13: #b294bb
-  --   cyan
-  --     color6:  #5e8d87
-  --     color14: #8abeb7
-  --   white
-  --     color7:  #707880
-  --     color15: #c5c8c6
+  font = "xft:Hack:size=10:style=Regular"
 
-    font        = "xft:JetBrainsMono Nerd Font:size=10:style=Regular"
-  , additionalFonts = []
-  , bgColor     = "#282a2e"
-  , fgColor     = "#c5c8c6"
-  , alpha       = 255
-  , position    = TopW C 100 25
-  , border      = NoBorder
-  , borderWidth = 0
-  , borderColor = "#373b41"
+, additionalFonts = ["xft:JetBrainsMono Nerd Font:size=10:style=Regular"]
+, bgColor = "#282a2e"
+, fgColor = "#c5c8c6"
+, alpha = 255
+, position = TopW C 100 25
+, border = NoBorder
+, borderWidth = 0
+, borderColor = "#373b41"
+, iconRoot = "/home/netwokz/.config/xmobar/icons/"
+, sepChar = "%" -- delineator between plugin names and straight text
+, alignSep = "}{" -- separator between left-right alignment
+, template = " %UnsafeStdinReader% }<fc=#56b6c2> %uparrow% %uptime% <icon=seperators/seperator.xpm/> %arch% %pacupdate% <icon=seperators/seperator.xpm/> %music% %songinfo%</fc> { <fc=#61afef>%cpu% <icon=seperators/seperator.xpm/> %multicoretemp% <icon=seperators/seperator.xpm/> %memory% <icon=seperators/seperator.xpm/> %disku% <icon=seperators/seperator.xpm/> %dynnetwork% <icon=seperators/seperator.xpm/> %KGYR% <icon=seperators/seperator.xpm/></fc> <fc=#c678dd>%date% <icon=seperators/seperator.xpm/> %speaker% %vol%</fc> "
+, lowerOnStart = True -- send to bottom of window stack on start
+, hideOnStart = False -- start with window unmapped (hidden)
+, allDesktops = True -- show on all desktops
+, overrideRedirect = True -- set the Override Redirect flag (Xlib)
+, pickBroadest = False -- choose widest display (multi-monitor)
+, persistent = True -- enable/disable hiding (True = disabled)
+, commands = [
 
-  , iconRoot = "/home/netwokz/.config/xmobar/icons/"
+       Run Cpu [ "--template" , "<fn=1>\xf85a </fn><total>%"] 10
 
-  , sepChar  = "%"   -- delineator between plugin names and straight text
-  , alignSep = "}{"  -- separator between left-right alignment
+       , Run Uptime [ "--template" , "<days>d <hours> h <minutes>m"] 60
 
-  , template = " %cpu% <icon=seperators/seperator.xpm/> %multicoretemp% <icon=seperators/seperator.xpm/> %memory% <icon=seperators/seperator.xpm/> %disku% <icon=seperators/seperator.xpm/> %dynnetwork% <icon=seperators/seperator.xpm/>} <icon=seperators/seperator.xpm/> %uptime% <icon=seperators/seperator.xpm/> { <icon=seperators/seperator.xpm/> %KBXK% <icon=seperators/seperator.xpm/> %date% <icon=seperators/seperator.xpm/> %default:Master%"
+       , Run DiskU [("/home", "<fn=1>\xf7c9 </fn><usedp>%")] [] 60
 
-  , lowerOnStart     = True    -- send to bottom of window stack on start
-  , hideOnStart      = False   -- start with window unmapped (hidden)
-  , allDesktops      = True    -- show on all desktops
-  , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
-  , pickBroadest     = False   -- choose widest display (multi-monitor)
-  , persistent       = True    -- enable/disable hiding (True = disabled)
-
-  , commands = [
-
-         Run UnsafeStdinReader
-
-       , Run Cpu [ "--template" , "<ipat><total>%"
-                 , "--Low"       , "55"      -- units: %
-                 , "--High"      , "77"      -- units: %
-                 , "--low"       , "#00a86b"
-                 , "--normal"    , "#de935f"
-                 , "--high"      , "#a54242"
-                 , "--ppad"      , "3"
-                 , "--width"     , "3"
-                 , "--maxtwidth" , "4"
-                 , "--"
-                   , "--load-icon-pattern" , "<icon=cpu/cpu_%%.xpm/>"
-                 ] 10
-
-       , Run Uptime [ "--template" , "up: <days>d <hours> h <minutes>m"] 60
-        
-       , Run DiskU [("/", "<usedipat><usedp>%")]
-                   [ "-L"       , "25"      -- units: %
-                   , "-H"       , "75"      -- units: %
-                   , "--low"    , "#00a86b"
-                   , "--normal" , "#00a86b"
-                   , "--high"   , "#a54242"
-                   , "-m"       , "1"
-                   , "-p"       , "3"
-                   , "--"
-                   , "--used-icon-pattern", "<icon=hdd/hdd_%%.xpm/>"]
-                   60
-                 
-       , Run MultiCoreTemp [ "--template" , "<maxipat><max>°C"
-                           , "--Low"      , "65"      -- units: °C
-                           , "--High"     , "75"      -- units: °C
-                           , "--low"      , "#00a86b"
-                           , "--normal"   , "#00a86b"
-                           , "--high"     , "#a54242"
+       , Run MultiCoreTemp [ "--template" , "<fn=1>\xf2c9 </fn><max>°"
                            , "--ppad"      , "3"
-                           , "--width"     , "3"
-                           , "--maxtwidth" , "5"
-                           , "--"
-                             , "--max-icon-pattern" , "<icon=temperature/temperature_%%.xpm/>"
-                             , "--mintemp" , "20"
-                             , "--maxtemp" , "100"
+                           , "--width"     , "2"
                            ] 50
 
-       , Run Memory [ "--template" , "<usedipat><usedratio>%"
-                    , "--Low"      , "55"      -- units: %
-                    , "--High"     , "77"      -- units: %
-                    , "--low"      , "#00a86b"
-                    , "--normal"   , "#de935f"
-                    , "--high"     , "#a54242"
+       , Run Memory [ "--template" , "<fn=1>\xf233 </fn><usedratio>%"
                     , "--ppad"      , "3"
                     , "--width"     , "3"
-                    , "--maxtwidth" , "4"
-                    , "--"
-                      , "--used-icon-pattern" , "<icon=ram/ram_%%.xpm/>"
                     ] 10
 
        , Run DynNetwork [ "--template" , "<rx> <icon=seperators/seperator.xpm/> <tx>"
-                        , "--Low"      , "100"   -- units: B/s
-                        , "--High"     , "100000"  -- units: B/s
                         , "-S"         , "true"
-                        , "--low"      , "#a54242"
-                        , "--normal"   , "#00a86b"
-                        , "--high"     , "#ee9a00"
-                        , "--maxtwidth" , "0"
-                        , "--"
-                          , "--rx-icon-pattern" , "<icon=network/rx/network_rx_%%.xpm/>"
-                          , "--tx-icon-pattern" , "<icon=network/tx/network_tx_%%.xpm/>"
+                        , "-m"         , "7"
                         ] 10
 
-       , Run WeatherX "KBXK" [ (""                        , "<fc=#5e8d87>?</fc>")
+       , Run WeatherX "KGYR" [ (""                        , "<fc=#5e8d87>?</fc>")
                              , ("clear"                   , "<icon=weather/weather_sunny.xpm/>")
                              , ("mostly clear"            , "<icon=weather/weather_mostly_sunny.xpm/>")
                              , ("sunny"                   , "<icon=weather/weather_sunny.xpm/>")
@@ -134,21 +56,31 @@ Config {
                              , ("overcast"                , "<icon=weather/weather_cloudy.xpm/>")
                              , ("considerable cloudiness" , "<icon=weather/weather_cloudy.xpm/>")
                              , ("obscured"                , "<icon=weather/weather_obscured.xpm/>")
-                             ] [ "--template", "<skyConditionS><tempF>°F <fc=#5f819d><rh></fc>%"
-                               , "--Low"      , "10"      -- units: %
-                               , "--High"     , "20"      -- units: %
-                               , "--low"      , "#81a2be"
-                               , "--normal"   , "#b5bd68"
-                               , "--high"     , "#de935f"
+                             ] [ "--template", "<skyConditionS><tempF>°F"
                                , "--ppad"      , "3"
                                , "--width"     , "3"
-                               , "--maxtwidth" , "18"
-                               ] 36000
+                               ] 3600
 
        , Run Volume "default" "Master" [] 10
 
-       , Run Date "%a %m/%d/%y <icon=seperators/seperator.xpm/> %I:%M:%S" "date" 10
+       , Run Com "echo" ["<fn=1>\xf028 </fn>"] "speaker" 3600
+
+       , Run Com "echo" ["<fn=1>\xf062 </fn>"] "uparrow" 3600
+
+       , Run Com "/home/netwokz/scripts/show-volume.py" [] "vol" 3600
+
+       , Run Com "echo" ["<fn=1>\xf303 </fn>"] "arch" 3600
+
+       , Run Com "/home/netwokz/scripts/avail_updates.sh" [] "pacupdate" 360
+
+       , Run Date "<fn=1>\xf073 </fn>%b %-d %-l:%M %p" "date" 10
+
+       , Run Com "echo" ["<fn=1>\xf001 </fn>"] "music" 3600
+
+       , Run Com "/home/netwokz/scripts/get_song_info.sh" [] "songinfo" 10
+
+       , Run UnsafeStdinReader
 
        ]
 
-  }
+}
