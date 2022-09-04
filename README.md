@@ -1,3 +1,3 @@
-# My custom dot files and otehrs
+# My custom dot files and others
 
 Simple config files.
