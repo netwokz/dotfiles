@@ -6,7 +6,7 @@ Simple config files.
 
 #### Install and reboot:
 
-```shell
+```console
 sudo pacman -S gnome-keyring libsecret
 ```
 
